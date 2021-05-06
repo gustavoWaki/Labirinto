@@ -14,5 +14,16 @@ public class Program {
 
         Labirinto labirinto = new Labirinto(colunas, linhas, arq);
 
+        String ret = null;
+        Coordenada coord = null;
+
+        for(int i = 0; i < linhas; i++){
+            for(int k = 0; k < colunas; k++){
+                coord = new Coordenada(k,i);
+                ret += labirinto.getPos(coord);
+            }
+            System.out.println(ret);
+            ret = "";
+        }
     }
 }

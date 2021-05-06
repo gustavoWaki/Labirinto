@@ -1,6 +1,6 @@
 public class Coordenada{
-    int X;
-    int Y;
+    private int X;
+    private int Y;
 
     public int getX() {
         return X;
@@ -8,6 +8,18 @@ public class Coordenada{
 
     public int getY() {
         return Y;
+    }
+
+    public void setX(int x) throws Exception{
+        if(x < 0)
+            throw new Exception("Valor de coordenada inválido");
+        this.X = x;
+    }
+
+    public void setY(int y) throws Exception{
+        if(y < 0)
+            throw new Exception("Valor de coordenada inválido");
+        this.Y = y;
     }
 
     public Coordenada(int x,int y){

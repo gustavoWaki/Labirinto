@@ -1,6 +1,6 @@
 public class Labirinto {
-    String[][] labirinto = null;
-    Coordenada entrada;
+    private String[][] labirinto = null;
+    private Coordenada entrada;
 
     public Labirinto(int colunas, int linhas)
     {
@@ -27,11 +27,7 @@ public class Labirinto {
         }
     }
 
-    public String toString(){
-        String ret = null;
-
-        
-
-        return ret;
+    public String getPos(Coordenada coord){
+        return this.labirinto[coord.getX()] [coord.getY()];
     }
 }
