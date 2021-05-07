@@ -24,6 +24,16 @@ public class Program {
 
         caminho.guardeUmItem(labirinto.getEntrada())  ;
 
+        System.out.println("");
+        for(int i = 0; i < linhas; i++){
+            for(int k = 0; k < colunas; k++){
+                coord = new Coordenada(k,i);
+                ret += labirinto.getPos(coord);
+            }
+            System.out.println(ret);
+            ret = "";
+        }
+
             boolean acabou = false;
             while(!acabou) {
 

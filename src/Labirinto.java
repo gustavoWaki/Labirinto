@@ -35,6 +35,27 @@ public class Labirinto {
         if(entrada == null){
             throw new Exception("Labirinto sem ENTRADA!");
         }
+        for(int i = 0; i < labirinto[0].length; i++){
+            if(i == 0 || i == labirinto[0].length - 1){
+                for(int j = 0; j < labirinto.length; j++){
+                    if(!this.getPos(new Coordenada(j, i)).equals("#") && !this.getPos(new Coordenada(j, i)).equals("E") && !this.getPos(new Coordenada(j, i)).equals("S"))
+                    {
+                        throw new Exception("Labirinto com erro de construção!");
+                    }
+                }
+            }
+            else {
+                if(!this.getPos(new Coordenada(0, i)).equals("#") && !this.getPos(new Coordenada(0, i)).equals("E") && !this.getPos(new Coordenada(0, i)).equals("S"))
+                {
+                    throw new Exception("Labirinto com erro de construção!");
+                }
+                if(!this.getPos(new Coordenada(labirinto.length-1, i)).equals("#") && !this.getPos(new Coordenada(labirinto.length-1, i)).equals("E") && !this.getPos(new Coordenada(labirinto.length-1, i)).equals("S"))
+                {
+                    throw new Exception("Labirinto com erro de construção!");
+                }
+            }
+
+        }
     }
 
     public String getPos(Coordenada coord){
