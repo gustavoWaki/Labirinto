@@ -10,6 +10,7 @@ public class Program {
         Leitor leitor = new Leitor(str);
         Pilha caminho = new Pilha<Coordenada>();
         Pilha bifurcacoes = new Pilha<Coordenada>();
+        ListaSimplesDesordenada opcoes = new ListaSimplesDesordenada<Coordenada>();
         Coordenada pos;
 
         int linhas = Integer.parseInt(leitor.lerLinha());
@@ -34,60 +35,73 @@ public class Program {
             ret = "";
         }
 
-            boolean acabou = false;
-            while(!acabou) {
+            boolean completou = false;
+            while(true) {
 
                 Coordenada atual = new Coordenada((Coordenada) caminho.recupereUmItem());
 
                 if (atual.getY() > 0) {
                     Coordenada norte = new Coordenada(atual.getX(), atual.getY() - 1);
-                    if (labirinto.getPos(norte).equals(" ")) {
+                    if (labirinto.getPos(norte).equals("S")) {
                         caminho.guardeUmItem(norte);
-                        labirinto.setPos("*", norte);
+                        completou = true;
+                        break;
                     }
-                    else if (labirinto.getPos(norte).equals("S")) {
-                        caminho.guardeUmItem(norte);
-                        acabou = true;
+                    else if (labirinto.getPos(norte).equals(" ")) {
+                        opcoes.guardeUmItemNoInicio(norte);
                     }
+
                 }
 
                 if (atual.getY() < linhas - 1) {
                     Coordenada sul = new Coordenada(atual.getX(), atual.getY() + 1);
-                    if (labirinto.getPos(sul).equals(" ")) {
+                    if (labirinto.getPos(sul).equals("S")) {
                         caminho.guardeUmItem(sul);
-                        labirinto.setPos("*", sul);
+                        completou = true;
+                        break;
                     }
-                    else if (labirinto.getPos(sul).equals("S")) {
-                        caminho.guardeUmItem(sul);
-                        acabou = true;
+                    else if (labirinto.getPos(sul).equals(" ")) {
+                        opcoes.guardeUmItemNoInicio(sul);
                     }
+
                 }
 
                 if (atual.getX() > 0) {
                     Coordenada oeste = new Coordenada(atual.getX() - 1, atual.getY());
-                    if (labirinto.getPos(oeste).equals(" ")) {
+                    if (labirinto.getPos(oeste).equals("S")) {
                         caminho.guardeUmItem(oeste);
-                        labirinto.setPos("*", oeste);
+                        completou = true;
+                        break;
                     }
-                    else if (labirinto.getPos(oeste).equals("S")) {
-                        caminho.guardeUmItem(oeste);
-                        acabou = true;
+                    else if (labirinto.getPos(oeste).equals(" ")) {
+                        opcoes.guardeUmItemNoInicio(oeste);
                     }
+
                 }
 
                 if (atual.getX() < colunas - 1) {
                     Coordenada leste = new Coordenada(atual.getX() + 1, atual.getY());
-                    if (labirinto.getPos(leste).equals(" ")) {
+                    if (labirinto.getPos(leste).equals("S")) {
                         caminho.guardeUmItem(leste);
-                        labirinto.setPos("*", leste);
+                        completou = true;
+                        break;
                     }
-                    else if (labirinto.getPos(leste).equals("S")) {
-                        caminho.guardeUmItem(leste);
-                        acabou = true;
+                    else if (labirinto.getPos(leste).equals(" ")) {
+                        opcoes.guardeUmItemNoInicio(leste);
+
                     }
                 }
 
-                if(atual.equals(caminho.recupereUmItem())){
+                if(opcoes.getQuantidade()>1){
+                    bifurcacoes.guardeUmItem(atual);
+                    atual = (Coordenada) opcoes.recupereItemDoInicio();
+                }
+                else if(opcoes.getQuantidade()==1){
+                    caminho.guardeUmItem(opcoes.recupereItemDoInicio());
+                    labirinto.setPos("*", (Coordenada) opcoes.recupereItemDoInicio());
+                    opcoes.removaItemDoInicio();
+                }
+                else if(opcoes.getQuantidade() == 0){
                     System.out.println("Labirinto sem saída");
                     break;
                 }
@@ -103,7 +117,7 @@ public class Program {
                 }
             }
 
-            if(acabou){
+            if(completou){
                 System.out.println("O programa achou a saída do labirinto na coordenada: " + caminho.recupereUmItem());
             }
 
