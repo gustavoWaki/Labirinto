@@ -10,11 +10,11 @@ public class Program {
         int linhas = Integer.parseInt(leitor.lerLinha());
         int colunas = Integer.parseInt(leitor.lerLinha());
 
-        String arq = leitor.ler();
+        String arq = leitor.ler().substring(4);
 
         Labirinto labirinto = new Labirinto(colunas, linhas, arq);
 
-        String ret = null;
+        String ret = "";
         Coordenada coord = null;
 
         for(int i = 0; i < linhas; i++){

@@ -17,7 +17,7 @@ public class Labirinto {
         int k = 0;
         for(int i = 0; i < labirinto[0].length; i++) {
             for (int h = 0 ;h < labirinto.length; h++){
-                labirinto[h][i] = str.substring(k + 2, k+3);
+                labirinto[h][i] = str.substring(k, k+1);
                 if(labirinto[h][i] == "E")
                 {
                     entrada = new Coordenada(h, i);
