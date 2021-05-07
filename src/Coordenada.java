@@ -27,6 +27,11 @@ public class Coordenada{
         this.Y = y;
     }
 
+    public Coordenada(Coordenada coord){
+        this.X = coord.getX();
+        this.Y = coord.getY();
+    }
+
     public String toString(){
         return "(" + X + ", " + Y + ")";
     }
