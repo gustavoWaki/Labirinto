@@ -77,6 +77,11 @@ public class Program {
                     }
                 }
 
+                if(atual.equals(caminho.recupereUmItem())){
+                    System.out.println("Labirinto sem saída");
+                    break;
+                }
+
                 System.out.println("");
                 for(int i = 0; i < linhas; i++){
                     for(int k = 0; k < colunas; k++){
@@ -88,6 +93,9 @@ public class Program {
                 }
             }
 
-        System.out.println(caminho.recupereUmItem());
+            if(acabou){
+                System.out.println("O programa achou a saída do labirinto na coordenada: " + caminho.recupereUmItem());
+            }
+
     }
 }

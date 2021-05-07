@@ -36,4 +36,24 @@ public class Coordenada{
         return "(" + X + ", " + Y + ")";
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if(this==obj)
+            return true;
+
+        if(obj==null)
+            return false;
+
+        if(this.getClass()!=obj.getClass())
+            return false;
+
+        Coordenada coord = (Coordenada)obj;
+
+        if(this.getX() != coord.getX()) return false;
+
+        if(this.getY() != coord.getY()) return false;
+
+        return true;
+    }
+
 }
