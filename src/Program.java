@@ -88,22 +88,30 @@ public class Program {
                     }
                     else if (labirinto.getPos(leste).equals(" ")) {
                         opcoes.guardeUmItemNoInicio(leste);
-
                     }
                 }
 
-                if(opcoes.getQuantidade()>1){
+                if(opcoes.getQuantidade()>1){ // bifurcação
                     bifurcacoes.guardeUmItem(atual);
-                    atual = (Coordenada) opcoes.recupereItemDoInicio();
-                }
-                else if(opcoes.getQuantidade()==1){
+                    opcoes.removaItemDoInicio();
                     caminho.guardeUmItem(opcoes.recupereItemDoInicio());
                     labirinto.setPos("*", (Coordenada) opcoes.recupereItemDoInicio());
                     opcoes.removaItemDoInicio();
                 }
-                else if(opcoes.getQuantidade() == 0){
-                    System.out.println("Labirinto sem saída");
-                    break;
+                else if(opcoes.getQuantidade()==1){ // apenas uma opção
+                    caminho.guardeUmItem(opcoes.recupereItemDoInicio());
+                    labirinto.setPos("*", (Coordenada) opcoes.recupereItemDoInicio());
+                    opcoes.removaItemDoInicio();
+                }
+                else if(opcoes.getQuantidade() == 0){ // sem saída
+                    if(bifurcacoes.isVazia()) {
+                        System.out.println("Labirinto sem saída");
+                        break;
+                    }
+                    else {
+                        caminho.guardeUmItem(bifurcacoes.recupereUmItem());
+                        bifurcacoes.removaUmItem();
+                    }
                 }
 
                 System.out.println("");
