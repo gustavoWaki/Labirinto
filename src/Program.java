@@ -4,7 +4,6 @@ public class Program {
 
     public static void main(String args[]) throws Exception {
 
-
         System.out.println("Digite o nome do arquivo: ");
         String str = Teclado.getUmString();
         Leitor leitor = new Leitor(str);
@@ -13,11 +12,10 @@ public class Program {
         ListaSimplesDesordenada opcoes = new ListaSimplesDesordenada<Coordenada>();
         Coordenada pos;
 
-        int linhas = Integer.parseInt(leitor.lerLinha());
-        int colunas = Integer.parseInt(leitor.lerLinha());
+        int linhas = leitor.getLinhas();
+        int colunas = leitor.getColunas();
 
         String arq = leitor.ler().substring(4);
-
         Labirinto labirinto = new Labirinto(colunas, linhas, arq);
 
         String ret = "";
@@ -128,6 +126,5 @@ public class Program {
             if(completou){
                 System.out.println("O programa achou a saída do labirinto na coordenada: " + caminho.recupereUmItem());
             }
-
     }
 }
