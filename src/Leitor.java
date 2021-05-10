@@ -52,4 +52,67 @@ public class Leitor {
     public int getColunas() {
         return colunas;
     }
+
+    public boolean equals(Object obj)
+    {
+        if(this == obj)
+            return true;
+
+        if(obj == null)
+            return false;
+
+        if(this.getClass() != obj.getClass())
+            return false;
+
+        Leitor lei = (Leitor) obj;
+
+        if(!this.arq.equals(lei.arq))
+            return false;
+
+        if(this.getLinhas() != lei.getLinhas())
+            return false;
+
+        if(this.getColunas() != lei.getColunas())
+            return false;
+
+        return true;
+    }
+
+    public int hashCode()
+    {
+        int ret = 2;
+
+        ret = ret * 7 + this.getLinhas();
+        ret = ret * 7 + this.getColunas();
+        ret = ret * 7 + this.arq.hashCode();
+
+        if(ret < 0)
+            ret = -ret;
+
+        return ret;
+    }
+
+    public Leitor(Leitor modelo) throws Exception{
+
+        if(modelo == null)
+            throw new Exception("modelo ausente");
+
+        this.linhas = modelo.getLinhas();
+        this.colunas = modelo.getColunas();
+        this.arq = modelo.arq;
+    }
+
+    public Object clone()
+    {
+        Leitor ret = null;
+
+        try
+        {
+            ret = new Leitor(this);
+        }
+        catch(Exception erro)
+        {}
+
+        return ret;
+    }
 }

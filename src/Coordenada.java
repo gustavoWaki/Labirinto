@@ -56,4 +56,30 @@ public class Coordenada{
         return true;
     }
 
+    public int hashCode()
+    {
+        int ret = 2;
+
+        ret = ret * 7 + this.getX();
+        ret = ret * 7 + this.getY();
+
+        if(ret < 0)
+            ret = -ret;
+
+        return ret;
+    }
+
+    public Object clone()
+    {
+        Coordenada ret = null;
+
+        try
+        {
+            ret = new Coordenada(this);
+        }
+        catch(Exception erro)
+        {}
+
+        return ret;
+    }
 }

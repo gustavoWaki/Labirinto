@@ -1,7 +1,6 @@
 public class Labirinto {
     private String[][] labirinto = null;
     private Coordenada entrada = null;
-    private Coordenada saida = null;
 
     public Labirinto(int colunas, int linhas)
     {
@@ -11,10 +10,6 @@ public class Labirinto {
     public Labirinto(int colunas, int linhas, String str) throws Exception
     {
         labirinto = new String[colunas][linhas];
-        /*
-        if(colunas*linhas != str.length())
-            throw new Exception("Colunas ou linhas foram informados de maneira ERRADA!");
-         */
         this.preencher(str);
     }
 
@@ -30,15 +25,6 @@ public class Labirinto {
                     }
                     else{
                         throw new Exception("Labirinto com mais de uma entrada!");
-                    }
-                }
-                if(str.substring(k, k + 1).equals("S"))
-                {
-                    if(saida == null) {
-                        this.saida = new Coordenada(h, i);
-                    }
-                    else{
-                        throw new Exception("Labirinto com mais de uma saída!");
                     }
                 }
                 k++;
@@ -80,5 +66,61 @@ public class Labirinto {
         this.labirinto[coord.getX()] [coord.getY()] = str;
     }
 
+    public boolean equals(Object obj)
+    {
+        if(obj == null)
+            return false;
 
+        if(this == obj)
+            return true;
+
+        if(this.getClass() != obj.getClass())
+            return false;
+
+        Labirinto lab = (Labirinto) obj;
+
+        if(!this.labirinto.equals(lab.labirinto))
+            return false;
+
+        if(this.getEntrada() != lab.entrada)
+            return false;
+
+        return true;
+    }
+
+    public int hashCode()
+    {
+        int ret = 2;
+
+        ret = ret * 7 + this.labirinto.hashCode();
+        ret = ret * 7 + this.entrada.hashCode();
+
+        if(ret < 0)
+            ret = -ret;
+
+        return ret;
+    }
+
+    public Labirinto(Labirinto modelo) throws Exception
+    {
+        if(modelo == null)
+            throw new Exception("modelo ausente");
+
+        this.labirinto = modelo.labirinto;
+        this.entrada = modelo.entrada;
+    }
+
+    public Object clone()
+    {
+        Labirinto ret = null;
+
+        try
+        {
+            ret = new Labirinto(this);
+        }
+        catch(Exception erro)
+        {}
+
+        return ret;
+    }
 }
