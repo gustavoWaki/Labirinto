@@ -129,5 +129,8 @@ public class Program {
                 System.out.println("O programa achou a saída do labirinto na coordenada: " + caminho.recupereUmItem());
             }
 
+            //laslalaldmlkasncauw
+        ///alwkidcnawouibdaolicxxnaws
+
     }
 }
