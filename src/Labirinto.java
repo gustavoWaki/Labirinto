@@ -1,6 +1,7 @@
 public class Labirinto {
     private String[][] labirinto = null;
     private Coordenada entrada = null;
+    private Coordenada saida = null;
 
     public Labirinto(int colunas, int linhas)
     {
@@ -10,8 +11,10 @@ public class Labirinto {
     public Labirinto(int colunas, int linhas, String str) throws Exception
     {
         labirinto = new String[colunas][linhas];
+        /*
         if(colunas*linhas != str.length())
             throw new Exception("Colunas ou linhas foram informados de maneira ERRADA!");
+         */
         this.preencher(str);
     }
 
@@ -27,6 +30,15 @@ public class Labirinto {
                     }
                     else{
                         throw new Exception("Labirinto com mais de uma entrada!");
+                    }
+                }
+                if(str.substring(k, k + 1).equals("S"))
+                {
+                    if(saida == null) {
+                        this.saida = new Coordenada(h, i);
+                    }
+                    else{
+                        throw new Exception("Labirinto com mais de uma saída!");
                     }
                 }
                 k++;
