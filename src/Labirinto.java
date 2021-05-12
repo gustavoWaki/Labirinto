@@ -11,10 +11,6 @@ public class Labirinto {
     public Labirinto(int colunas, int linhas, String str) throws Exception
     {
         labirinto = new String[colunas][linhas];
-        /*
-        if(colunas*linhas != str.length())
-            throw new Exception("Colunas ou linhas foram informados de maneira ERRADA!");
-         */
         this.preencher(str);
     }
 
